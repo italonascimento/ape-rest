@@ -29,42 +29,22 @@ app.use((req,res,next) => {
   next()
 })
 
-app.get('/api/:collection', (req, res, next) => {
-  const method = req.method
-  const collection = req.params.collection
-  const item = req.params.item
-  const db = req.db
-
-  const get = db
-    .get('entities')
-    .find({collection: collection}, '-collection')
-
-  get.then(results => {
-    sendJSON({
-      type: collection,
-      data: results || []
-    })
-  })
-
-  get.catch(err => {
-    next(err)
-  })
-})
-
-app.get('/api/:collection/:entity', (req, res, next) => {
+app.get('/api/:collection/:entity?', (req, res, next) => {
   const method = req.method
   const collection = req.params.collection
   const entity = req.params.entity
   const db = req.db
 
+  const query = {collection: collection, _id: entity}
+
   const get = db
     .get('entities')
-    .find({collection: collection, _id: entity}, '-collection')
+    .find(_.omit(query, query._id ? '' : '_id'), '-collection')
 
   get.then(results => {
-    const result = results[0] || null
+    const result = entity ? results[0] : results
 
-    sendJSON({
+    sendJSON(res, {
       type: collection,
       data: result
     })
