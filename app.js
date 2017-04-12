@@ -40,11 +40,10 @@ app.get('/api/:collection', (req, res, next) => {
     .find({collection: collection}, '-collection')
 
   get.then(results => {
-    res.setHeader('Content-Type', 'application/json')
-    res.send(JSON.stringify({
+    sendJSON({
       type: collection,
-      data: results
-    }))
+      data: results || []
+    })
   })
 
   get.catch(err => {
@@ -63,13 +62,12 @@ app.get('/api/:collection/:entity', (req, res, next) => {
     .find({collection: collection, _id: entity}, '-collection')
 
   get.then(results => {
-    const result = results[0]
+    const result = results[0] || null
 
-    res.setHeader('Content-Type', 'application/json')
-    res.send(JSON.stringify({
+    sendJSON({
       type: collection,
       data: result
-    }))
+    })
   })
 
   get.catch(err => {
@@ -94,5 +92,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500)
   res.render('error')
 })
+
+function sendJSON(res, obj) {
+  res.setHeader('Content-Type', 'application/json')
+  res.send(JSON.stringify(obj))
+}
 
 module.exports = app
