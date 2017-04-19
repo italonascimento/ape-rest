@@ -2,13 +2,15 @@
   "name": "ape-client",
   "version": "0.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "devDependencies": {
     "@cycle/dom": "^17.1.0",
     "@cycle/history": "^6.1.0",
     "@cycle/isolate": "^2.1.0",
     "@cycle/run": "^3.1.0",
+    "awesome-typescript-loader": "^3.1.2",
     "cycle-onionify": "^3.2.0",
     "typescript": "^2.2.2",
     "webpack": "^2.4.1"
