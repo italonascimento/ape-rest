@@ -1,7 +1,8 @@
-const path = require('path');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.ts",
 
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -42,5 +43,12 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     historyApiFallback: true,
-  }
+    port: 3000
+  },
+
+  plugins: [new HtmlWebpackPlugin({
+    title: 'Ape REST',
+    hash: true,
+    template: './src/index.ejs'
+  })]
 }
