@@ -11,9 +11,11 @@
     "@cycle/history": "^6.1.0",
     "@cycle/isolate": "^2.1.0",
     "@cycle/run": "^3.1.0",
+    "@types/lodash": "^4.14.63",
     "awesome-typescript-loader": "^3.1.2",
     "cycle-onionify": "^3.2.0",
     "html-webpack-plugin": "^2.28.0",
+    "lodash": "^4.17.4",
     "typescript": "^2.2.2",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.2"

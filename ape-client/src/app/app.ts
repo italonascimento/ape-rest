@@ -3,19 +3,12 @@ import {StateSource} from 'cycle-onionify'
 import xs from 'xstream'
 import {Stream, MemoryStream} from 'xstream'
 import {PushHistoryInput, GenericInput} from '@cycle/history'
-import {routes} from './router'
+import {routes, Route} from './router'
+import * as _ from 'lodash'
 
 export interface State {
   currentPage: string
 }
-
-export type Reducer = (prev?: State) => State | undefined;
-
-export type Navigate = {
-
-}
-
-export type Action = Stream<Navigate>
 
 export interface Sources {
   DOM: DOMSource
@@ -25,40 +18,29 @@ export interface Sources {
 
 export interface Sinks {
   dom: Stream<VNode>
-  onion: Stream<Reducer>
 }
 
 export function App(sources: Sources): Partial<Sinks> {
 
-  const state$ = sources.onion.state$
-  const action$ = intent(sources)
-  const reducer$ = model(action$)
-  const vdom$ = view(state$)
+  const history$ = sources.history
+  const vdom$ = view(history$)
 
-  const sinks: Sinks = {
+  const sinks: Partial<Sinks> = {
     dom: vdom$,
-    onion: reducer$
   }
 
   return sinks
 }
 
-function intent(sources: Sources): Action {
-  const history$ = sources.history
-}
-
-function model(action: Action): Stream<Reducer> {
-
-}
-
-function view(state: MemoryStream<State>): Stream<VNode> {
-  return state.map(state =>
+function view(history: Stream<GenericInput>): Stream<VNode> {
+  return history.map(history =>
     div('.main-content', [
-      currentPage(state.currentPage)
+      currentPage(history)
     ])
   )
 }
 
-function currentPage(name: string): VNode {
-  return routes[name].view
+function currentPage(history: GenericInput): VNode {
+  const node = _.find(routes, (route: Route) => route.path === history.pathname)
+  return node ? node.view : null
 }

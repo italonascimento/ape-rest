@@ -8,7 +8,7 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
-        "lib": ["es5", "es6", "dom"]
+        "allowJs": true
     },
     "include": [
       "src/**/**/*"

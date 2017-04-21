@@ -1,7 +1,13 @@
-import {p} from '@cycle/dom'
+import {VNode, p} from '@cycle/dom'
 
-export const routes = {
-  home: {
-    view: p('home')
-  }
+export interface Route {
+  path: string,
+  view: VNode,
 }
+
+export const routes: Route[] = [
+  {
+    path: '/',
+    view: p(['Home'])
+  }
+]
