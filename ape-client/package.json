@@ -11,6 +11,8 @@
     "@cycle/history": "^6.1.0",
     "@cycle/isolate": "^2.1.0",
     "@cycle/run": "^3.1.0",
+    "@types/core-js": "^0.9.41",
+    "@types/history": "^4.5.0",
     "@types/lodash": "^4.14.63",
     "awesome-typescript-loader": "^3.1.2",
     "cycle-onionify": "^3.2.0",

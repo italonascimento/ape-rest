@@ -2,12 +2,12 @@ import {DOMSource, VNode, p, div} from '@cycle/dom'
 import {StateSource} from 'cycle-onionify'
 import xs from 'xstream'
 import {Stream, MemoryStream} from 'xstream'
-import {PushHistoryInput, GenericInput} from '@cycle/history'
+import {HistoryInput, GenericInput} from '@cycle/history'
 import {routes, Route} from './router'
 import * as _ from 'lodash'
 
 export interface State {
-  currentPage: string
+
 }
 
 export interface Sources {
@@ -17,7 +17,7 @@ export interface Sources {
 }
 
 export interface Sinks {
-  dom: Stream<VNode>
+  DOM: Stream<VNode>
 }
 
 export function App(sources: Sources): Partial<Sinks> {
@@ -26,7 +26,7 @@ export function App(sources: Sources): Partial<Sinks> {
   const vdom$ = view(history$)
 
   const sinks: Partial<Sinks> = {
-    dom: vdom$,
+    DOM: vdom$,
   }
 
   return sinks
