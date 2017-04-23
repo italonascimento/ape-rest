@@ -7,13 +7,16 @@
   },
   "dependencies": {
     "body-parser": "~1.16.0",
+    "bookshelf": "^0.10.3",
+    "bookshelf-paranoia": "^0.10.4",
+    "bookshelf-uuid": "^1.0.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
     "express": "~4.14.1",
+    "knex": "^0.12.9",
     "lodash": "^4.17.4",
-    "mongodb": "^2.2.24",
-    "monk": "^4.0.0",
     "morgan": "~1.7.0",
+    "pg": "^6.1.5",
     "serve-favicon": "~2.3.2"
   },
   "devDependencies": {
