@@ -144,8 +144,8 @@ app.use((req,res,next) => {
 
 app.post('/admin/types', (req, res, next) => {
   const type = {
-    title: req.body.title,
-    attributes: JSON.parse(req.body.attributes)
+    name: req.body.title,
+    attributes: req.body.attributes
   }
 
   new models.Type(type)
