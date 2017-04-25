@@ -5,11 +5,15 @@
     "start": "node ./bin/www",
     "watch": "nodemon ./bin/www"
   },
+  "bin": {
+    "ape": "./cli/ape-cli"
+  },
   "dependencies": {
     "body-parser": "~1.16.0",
     "bookshelf": "^0.10.3",
     "bookshelf-paranoia": "^0.10.4",
     "bookshelf-uuid": "^1.0.0",
+    "commander": "^2.9.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
     "express": "~4.14.1",

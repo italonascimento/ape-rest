@@ -145,7 +145,7 @@ app.use((req,res,next) => {
 app.post('/admin/types', (req, res, next) => {
   const type = {
     name: req.body.title,
-    attributes: req.body.attributes
+    attributes: req.body.attributeskne
   }
 
   new models.Type(type)

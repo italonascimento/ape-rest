@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+
+program
+  .option('--verbose', 'Verbose errors and results')
+  .parse(process.argv)
+
+const knex = require('knex')(require('../knexfile.js').development)
+const schema = require('../schema.js')
+
+console.log("\x1b[1m")
+console.log('[ape] Migrating tables...')
+console.log()
+
+schema.up(knex)
+  .then(res => {
+    console.log("\x1b[32m")
+    console.log('[ape] Migration finished successfully')
+
+    if(program.verbose)
+      console.log(res)
+
+    console.log()
+    process.exit(1)
+  })
+  .catch(err => {
+    console.log("\x1b[31m")
+    console.log('[ape] Migration failed!')
+
+    if(program.verbose)
+      console.log(err)
+
+    console.log()
+    process.exit(0)
+  })
