@@ -3,10 +3,23 @@
 var program = require('commander');
 
 program
-  .option('--verbose', 'Verbose errors and results')
+  .option('-v, --verbose', 'Show verbose errors and results')
+  .option('-p, --production', 'Migrates for production env')
+  .option('-s, --staging', 'Migrate for staging env')
+  .option('-e, --env <flag>', 'Specify custom environment flag for migration')
   .parse(process.argv)
 
-const knex = require('knex')(require('../knexfile.js').development)
+let env = 'development'
+
+if(program.production){
+  env = 'production'
+}else if(program.staging){
+  env = 'staging'
+}else if(program.env){
+  env = program.env
+}
+
+const knex = require('knex')(require('../knexfile.js')[env])
 const schema = require('../schema.js')
 
 console.log("\x1b[1m")

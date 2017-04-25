@@ -1,5 +1,3 @@
-// Update with your config settings.
-
 module.exports = {
 
   development: {
@@ -15,35 +13,34 @@ module.exports = {
   },
 
   staging: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      host     : '127.0.0.1',
+      port     : 5432,
+      user     : 'postgres',
+      password : '07italo08abn90',
+      database : 'ape-rest',
+      charset  : 'utf8'
     },
     pool: {
       min: 2,
       max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
     }
   },
 
   production: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      host     : '127.0.0.1',
+      port     : 5432,
+      user     : 'postgres',
+      password : '07italo08abn90',
+      database : 'ape-rest',
+      charset  : 'utf8'
     },
     pool: {
       min: 2,
       max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
     }
   }
-
-};
+}
