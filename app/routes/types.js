@@ -23,7 +23,7 @@ router.get('/:id?', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const type = {
-    name: req.body.title,
+    name: req.body.name,
     attributes: req.body.attributeskne
   }
 
@@ -31,7 +31,7 @@ router.post('/', (req, res, next) => {
     .save()
     .then(model => {
       sendJSON(res, {
-        type: 'types',
+        type: 'collections',
         data: model.toJSON()
       })
     })
