@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const shell = require('shelljs')
+const path = require('path')
+
+program.parse(process.argv)
+
+const pathName = program.args[0]
+
+shell.echo('[ape] Initializing project at ./' + pathName)
+shell.cp('-r', path.join(__dirname, '../app'), path.join(process.cwd(), pathName))
+
+// shell.echo('[ape] Installing dependencies...')
+// shell.cd(pathName)
+// shell.touch('npm i')
