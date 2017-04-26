@@ -10,10 +10,11 @@ router.get('/:id?', (req, res, next) => {
     .where(query)
     .fetchAll()
     .then(collection => {
+      const result = id ? collection.at(0) : collection
 
       sendJSON(res, {
         type: 'types',
-        data: collection.toJSON()
+        data: result.toJSON()
       })
     })
     .catch(err => {
