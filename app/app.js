@@ -7,8 +7,9 @@ const bodyParser = require('body-parser')
 const _ = require('lodash')
 const slugify = require('./utils/slugify')
 
-const bookshelf = require('./bookshelf')
-const models = require('./models')
+const bookshelf = require('./bookshelf/bookshelf')
+
+const typesRouter = require('./routes/types')
 
 const app = express()
 
@@ -118,48 +119,7 @@ app.use((req,res,next) => {
 //   })
 // })
 
-// app.get('/admin/types/:type?', (req, res, next) => {
-//   const type = req.params.type
-//   const db = req.db
-//
-//   const query = _.omit({_id: type}, type ? '' : '_id')
-//
-//   const get = db
-//     .get('types')
-//     .find(query)
-//
-//   get.then(results => {
-//     const result = type ? results[0] : results
-//
-//     sendJSON(res, {
-//       type: 'types',
-//       data: result
-//     })
-//   })
-//
-//   get.catch(err => {
-//     next(err)
-//   })
-// })
-
-app.post('/admin/types', (req, res, next) => {
-  const type = {
-    name: req.body.title,
-    attributes: req.body.attributeskne
-  }
-
-  new models.Type(type)
-    .save()
-    .then(model => {
-      sendJSON(res, {
-        type: 'types',
-        data: model.toJSON()
-      })
-    })
-    .catch(err => {
-      next(err)
-    })
-})
+app.use('/admin/types', typesRouter)
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found')
@@ -174,10 +134,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500)
   res.send(err.message)
 })
-
-function sendJSON(res, obj) {
-  res.setHeader('Content-Type', 'application/json')
-  res.send(JSON.stringify(obj))
-}
 
 module.exports = app
