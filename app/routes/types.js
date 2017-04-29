@@ -1,44 +1,60 @@
 const router = require('express').Router()
 const models = require('../bookshelf/models')
 const sendJSON = require('../utils/sendJSON')
+const slugify = require('../utils/slugify')
 
-router.get('/:id?', (req, res, next) => {
+router.get('/', (req, res, next) => {
+
+  models.Type.forge()
+    .fetchAll()
+    .then(collection => {
+      sendJSON(res, {
+        type: 'types',
+        data: collection.toJSON()
+      })
+    })
+    .catch(err => next(err))
+})
+
+router.get('/:id', (req, res, next) => {
   const id = req.params.id
-  const query = id ? {id: id} : {}
+  const query = {id: id}
 
   models.Type.forge()
     .where(query)
-    .fetchAll()
+    .fetch({withRelated: 'fields'})
     .then(collection => {
-      const result = id ? collection.at(0) : collection
-
       sendJSON(res, {
         type: 'types',
-        data: result.toJSON()
+        data: collection.toJSON({omitPivot: true})
       })
     })
-    .catch(err => {
-      next(err)
-    })
+    .catch(err => next(err))
 })
 
 router.post('/', (req, res, next) => {
   const type = {
     name: req.body.name,
-    attributes: req.body.attributeskne
+    slug: slugify(req.body.slug || req.body.name),
   }
+
+  const fields = JSON.parse(req.body.fields) || []
+
+  let savedType
 
   models.Type.forge(type)
     .save()
     .then(model => {
+      savedType = model
+      return model.fields().attach(fields)
+    })
+    .then(model => {
       sendJSON(res, {
-        type: 'collections',
-        data: model.toJSON()
+        type: 'types',
+        data: savedType.toJSON()
       })
     })
-    .catch(err => {
-      next(err)
-    })
+    .catch(err => next(err))
 })
 
 module.exports = router

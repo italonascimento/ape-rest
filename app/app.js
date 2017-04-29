@@ -9,6 +9,7 @@ const slugify = require('./utils/slugify')
 
 const bookshelf = require('./bookshelf/bookshelf')
 
+const fieldsRouter = require('./routes/fields')
 const typesRouter = require('./routes/types')
 const collectionsRouter = require('./routes/collections')
 
@@ -53,8 +54,9 @@ app.use((req,res,next) => {
 //   const db = req.db
 // })
 
-app.use('/admin/collections', collectionsRouter)
+app.use('/admin/fields', fieldsRouter)
 app.use('/admin/types', typesRouter)
+app.use('/admin/collections', collectionsRouter)
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found')

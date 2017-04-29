@@ -3,7 +3,6 @@ exports.up = function(knex, Promise) {
     table.uuid('id').primary()
     table.string('name')
     table.string('slug').unique()
-    table.string('attributes')
   }).createTable('collections', function(table) {
     table.uuid('id').primary()
     table.string('name')

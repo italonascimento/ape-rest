@@ -5,13 +5,13 @@ exports.up = function(knex, Promise) {
       table.string('name')
       table.string('slug').unique()
     })
-    .createTable('types_childtypes', table => {
-      table.uuid('id').primary()
+    .createTable('childtypes_types', table => {
+      table.increments('id')
       table.uuid('type_id').references('types.id')
       table.uuid('childtype_id').references('types.id')
     })
-    .createTable('types_fields', table => {
-      table.uuid('id').primary()
+    .createTable('fields_types', table => {
+      table.increments('id')
       table.uuid('type_id').references('types.id')
       table.uuid('field_id').references('fields.id')
     })
@@ -19,7 +19,7 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return knex.schema
-    .dropTable('types_childtypes')
-    .dropTable('types_fields')
+    .dropTable('childtypes_types')
+    .dropTable('fields_types')
     .dropTable('fields')
 }
