@@ -54,9 +54,12 @@ app.use((req,res,next) => {
 //   const db = req.db
 // })
 
+
 app.use('/admin/fields', fieldsRouter)
 app.use('/admin/types', typesRouter)
 app.use('/admin/collections', collectionsRouter)
+
+app.get('/*', express.static(path.join(__dirname, '../node_modules/balaclava-gui/dist')))
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found')

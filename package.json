@@ -1,5 +1,5 @@
 {
-  "name": "ape-server",
+  "name": "balaclava",
   "version": "0.0.0",
   "scripts": {
     "start": "node ./bin/www",
@@ -9,6 +9,7 @@
     "ape": "./cli/ape-cli"
   },
   "dependencies": {
+    "balaclava-gui": "ssh+git@github.com:italonascimento/balaclava-gui.git",
     "body-parser": "~1.16.0",
     "bookshelf": "^0.10.3",
     "bookshelf-paranoia": "^0.10.4",
