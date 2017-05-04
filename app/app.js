@@ -54,6 +54,11 @@ app.use((req,res,next) => {
 //   const db = req.db
 // })
 
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+  next()
+})
 
 app.use('/admin/fields', fieldsRouter)
 app.use('/admin/types', typesRouter)
