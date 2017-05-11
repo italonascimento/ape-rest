@@ -15,7 +15,6 @@ exports.seed = function(knex, Promise) {
         {id: uuid(), name: 'Multiline', slug: 'multiline'},
         {id: uuid(), name: 'Single choice', slug: 'single-choice'},
         {id: uuid(), name: 'Multichoice', slug: 'multichoice'},
-        {id: uuid(), name: 'Dropdown', slug: 'dropdown'},
       ]);
     });
 };
