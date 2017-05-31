@@ -38,7 +38,7 @@ router.post('/', (req, res, next) => {
     slug: slugify(req.body.slug || req.body.name),
   }
 
-  const fields = JSON.parse(req.body.fields) || []
+  const fields = req.body.fields ? JSON.parse(req.body.fields) : []
 
   let savedType
 
