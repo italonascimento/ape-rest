@@ -25,38 +25,10 @@ app.use((req,res,next) => {
   next()
 })
 
-// app.get('/api/:collection/:entity?', (req, res, next) => {
-//   const collection = req.params.collection
-//   const entity = req.params.entity
-//
-//   const query = _.omit({collection: collection, _id: entity}, entity ? '' : '_id')
-//
-//   const get = db
-//     .get('entities')
-//     .find(query, '-collection')
-//
-//   get.then(results => {
-//     const result = entity ? results[0] : results
-//
-//     sendJSON(res, {
-//       type: collection,
-//       data: result
-//     })
-//   })
-//
-//   get.catch(err => {
-//     next(err)
-//   })
-// })
-
-// app.post('/api/:collection', (req, res, next) => {
-//   const collection = req.params.collection
-//   const db = req.db
-// })
-
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
   next()
 })
 
